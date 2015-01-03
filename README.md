@@ -36,7 +36,7 @@ Twitter, Flickr, Github, Instagram, Foursquare. Fitbit, Withings, Linkedin, Drop
   link "CommonCrypto"
   export *
 }`
-11. Open the "Build Settings" panel and set <OAuthSwift_Path>/CommonCrypto to "Import Paths".
+11. Open the "Build Settings" panel and set `<OAuthSwift_Path>/CommonCrypto` to "Import Paths".
 
 ---  
 
@@ -86,14 +86,14 @@ oauthswift.authorizeWithCallbackURL( NSURL(string: "oauth-swift://oauth-callback
 
 ### Setting Swift Compiler
 
-![Image](OAuthSwiftDemo/Images/SwiftCompiler.png "Image")
+![Image](Example/Images/SwiftCompiler.png "Image")
 
 ### Setting URL Schemes
 
-![Image](OAuthSwiftDemo/Images/URLSchemes.png "Image")
+![Image](Example/Images/URLSchemes.png "Image")
 
 ### Images
 
-![Image](OAuthSwiftDemo/Images/Services.png "Image")
-![Image](OAuthSwiftDemo/Images/TwitterOAuth.png "Image")
-![Image](OAuthSwiftDemo/Images/TwitterOAuthTokens.png "Image")
+![Image](Example/Images/Services.png "Image")
+![Image](Example/Images/TwitterOAuth.png "Image")
+![Image](Example/Images/TwitterOAuthTokens.png "Image")
