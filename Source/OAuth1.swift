@@ -1,5 +1,5 @@
 //
-//  OAuth1Swift.swift
+//  OAuth1.swift
 //  OAuthSwift
 //
 //  Created by Dongri Jin on 6/22/14.
@@ -12,9 +12,9 @@ import UIKit
 // OAuthSwift errors
 public let OAuthSwiftErrorDomain = "oauthswift.error"
 
-class OAuth1Swift {
+public class OAuth1 {
 
-    var client: OAuthSwiftClient
+    public var client: OAuthSwiftClient
 
     var consumer_key: String
     var consumer_secret: String
@@ -24,7 +24,7 @@ class OAuth1Swift {
 
     var observer: AnyObject?
 
-    init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
+    public init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
         self.consumer_key = consumerKey
         self.consumer_secret = consumerSecret
         self.request_token_url = requestTokenUrl
@@ -43,11 +43,11 @@ class OAuth1Swift {
         static let appOnlyAuthenticationErrorCode = 1
     }
 
-    typealias TokenSuccessHandler = (credential: OAuthSwiftCredential, response: NSURLResponse) -> Void
-    typealias FailureHandler = (error: NSError) -> Void
+    public typealias TokenSuccessHandler = (credential: OAuthSwiftCredential, response: NSURLResponse) -> Void
+    public typealias FailureHandler = (error: NSError) -> Void
 
     // 0. Start
-    func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: ((error: NSError) -> Void)) {
+    public func authorizeWithCallbackURL(callbackURL: NSURL, success: TokenSuccessHandler, failure: FailureHandler) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             credential, response in
 
@@ -108,7 +108,7 @@ class OAuth1Swift {
         }, failure: failure)
     }
 
-    class func handleOpenURL(url: NSURL) {
+    public class func handleOpenURL(url: NSURL) {
         let notification = NSNotification(name: CallbackNotification.notificationName, object: nil,
             userInfo: [CallbackNotification.optionsURLKey: url])
         NSNotificationCenter.defaultCenter().postNotification(notification)

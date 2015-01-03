@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UIWebViewDelegate {
@@ -52,11 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWebViewDelegate {
         println(url)
         if (url.host == "oauth-callback") {
             if (url.path!.hasPrefix("/twitter") || url.path!.hasPrefix("/flickr") || url.path!.hasPrefix("/fitbit")
-             || url.path!.hasPrefix("/withings") || url.path!.hasPrefix("/linkedin")) {
-                OAuth1Swift.handleOpenURL(url)
+                || url.path!.hasPrefix("/withings") || url.path!.hasPrefix("/linkedin")) {
+                    OAuthSwift.OAuth1.handleOpenURL(url)
             }
             if ( url.path!.hasPrefix("/github" ) || url.path!.hasPrefix("/instagram" ) || url.path!.hasPrefix("/foursquare") || url.path!.hasPrefix("/dropbox")) {
-                OAuth2Swift.handleOpenURL(url)
+                OAuthSwift.OAuth2.handleOpenURL(url)
             }
         }
         return true

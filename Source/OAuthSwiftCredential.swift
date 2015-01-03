@@ -7,13 +7,13 @@
 //
 
 
-class OAuthSwiftCredential {
+public class OAuthSwiftCredential {
     
-    var consumer_key: String = String()
-    var consumer_secret: String = String()
-    var oauth_token: String = String()
-    var oauth_token_secret: String = String()
-    var oauth_verifier: String = String()
+    public var consumer_key: String = String()
+    public var consumer_secret: String = String()
+    public var oauth_token: String = String()
+    public var oauth_token_secret: String = String()
+    public var oauth_verifier: String = String()
     init(){
         
     }

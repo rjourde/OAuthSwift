@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import OAuthSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var services = ["Twitter", "Flickr", "Github", "Instagram", "Foursquare", "Fitbit", "Withings", "Linkedin", "Dropbox"]
     
     override func viewDidLoad() {
@@ -20,13 +21,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         self.view.addSubview(tableView);
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     func doOAuthTwitter(){
-        let oauthswift = OAuth1Swift(
+        let oauthswift = OAuthSwift.OAuth1(
             consumerKey:    Twitter["consumerKey"]!,
             consumerSecret: Twitter["consumerSecret"]!,
             requestTokenUrl: "https://api.twitter.com/oauth/request_token",
@@ -45,16 +46,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     println(jsonDict)
                 }, failure: {(error:NSError!) -> Void in
                     println(error)
-                })
+            })
             
             }, failure: {(error:NSError!) -> Void in
                 println(error.localizedDescription)
             }
         )
     }
-
+    
     func doOAuthFlickr(){
-        let oauthswift = OAuth1Swift(
+        let oauthswift = OAuthSwift.OAuth1(
             consumerKey:    Flickr["consumerKey"]!,
             consumerSecret: Flickr["consumerSecret"]!,
             requestTokenUrl: "https://www.flickr.com/services/oauth/request_token",
@@ -81,16 +82,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }, failure: {(error:NSError!) -> Void in
                     println(error)
             })
-
-
-        }, failure: {(error:NSError!) -> Void in
-            println(error.localizedDescription)
+            
+            
+            }, failure: {(error:NSError!) -> Void in
+                println(error.localizedDescription)
         })
         
     }
-
+    
     func doOAuthGithub(){
-        let oauthswift = OAuth2Swift(
+        let oauthswift = OAuth2(
             consumerKey:    Github["consumerKey"]!,
             consumerSecret: Github["consumerSecret"]!,
             authorizeUrl:   "https://github.com/login/oauth/authorize",
@@ -102,12 +103,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.showAlertView("Github", message: "oauth_token:\(credential.oauth_token)")
             }, failure: {(error:NSError!) -> Void in
                 println(error.localizedDescription)
-            })
+        })
         
     }
-
+    
     func doOAuthInstagram(){
-        let oauthswift = OAuth2Swift(
+        let oauthswift = OAuth2(
             consumerKey:    Instagram["consumerKey"]!,
             consumerSecret: Instagram["consumerSecret"]!,
             authorizeUrl:   "https://api.instagram.com/oauth/authorize",
@@ -126,13 +127,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }, failure: {(error:NSError!) -> Void in
                     println(error)
             })
-        }, failure: {(error:NSError!) -> Void in
-            println(error.localizedDescription)
+            }, failure: {(error:NSError!) -> Void in
+                println(error.localizedDescription)
         })
     }
-
+    
     func doOAuthFoursquare(){
-        let oauthswift = OAuth2Swift(
+        let oauthswift = OAuth2(
             consumerKey:    Foursquare["consumerKey"]!,
             consumerSecret: Foursquare["consumerSecret"]!,
             authorizeUrl:   "https://foursquare.com/oauth2/authorize",
@@ -143,11 +144,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.showAlertView("Foursquare", message: "oauth_token:\(credential.oauth_token)")
             }, failure: {(error:NSError!) -> Void in
                 println(error.localizedDescription)
-            })
+        })
     }
     
     func doOAuthFitbit(){
-        let oauthswift = OAuth1Swift(
+        let oauthswift = OAuth1(
             consumerKey:    Fitbit["consumerKey"]!,
             consumerSecret: Fitbit["consumerSecret"]!,
             requestTokenUrl: "https://api.fitbit.com/oauth/request_token",
@@ -161,9 +162,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 println(error.localizedDescription)
         })
     }
-
+    
     func doOAuthWithings(){
-        let oauthswift = OAuth1Swift(
+        let oauthswift = OAuth1(
             consumerKey:    Withings["consumerKey"]!,
             consumerSecret: Withings["consumerSecret"]!,
             requestTokenUrl: "https://oauth.withings.com/account/request_token",
@@ -179,7 +180,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func doOAuthLinkedin(){
-        let oauthswift = OAuth1Swift(
+        let oauthswift = OAuth1(
             consumerKey:    Linkedin["consumerKey"]!,
             consumerSecret: Linkedin["consumerSecret"]!,
             requestTokenUrl: "https://api.linkedin.com/uas/oauth/requestToken",
@@ -193,9 +194,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 println(error.localizedDescription)
         })
     }
-
+    
     func doOAuthDropbox(){
-        let oauthswift = OAuth2Swift(
+        let oauthswift = OAuth2(
             consumerKey:    Dropbox["consumerKey"]!,
             consumerSecret: Dropbox["consumerSecret"]!,
             authorizeUrl:   "https://www.dropbox.com/1/oauth2/authorize",
@@ -214,19 +215,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     println(jsonDict)
                 }, failure: {(error:NSError!) -> Void in
                     println(error)
-                })
-
+            })
+            
             }, failure: {(error:NSError!) -> Void in
                 println(error.localizedDescription)
         })
     }
-
+    
     func showAlertView(title: String, message: String) {
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int  {
         return services.count
     }
@@ -240,26 +241,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
         var service: String = services[indexPath.row]
         switch service {
-            case "Twitter":
-                doOAuthTwitter()
-            case "Flickr":
-                doOAuthFlickr()
-            case "Github":
-                doOAuthGithub()
-            case "Instagram":
-                doOAuthInstagram()
-            case "Foursquare":
-                doOAuthFoursquare()
-            case "Fitbit":
-                doOAuthFitbit()
-            case "Withings":
-                doOAuthWithings()
-            case "Linkedin":
-                doOAuthLinkedin()
-            case "Dropbox":
-                doOAuthDropbox()
-            default:
-                println("default (check ViewController tableView)")
+        case "Twitter":
+            doOAuthTwitter()
+        case "Flickr":
+            doOAuthFlickr()
+        case "Github":
+            doOAuthGithub()
+        case "Instagram":
+            doOAuthInstagram()
+        case "Foursquare":
+            doOAuthFoursquare()
+        case "Fitbit":
+            doOAuthFitbit()
+        case "Withings":
+            doOAuthWithings()
+        case "Linkedin":
+            doOAuthLinkedin()
+        case "Dropbox":
+            doOAuthDropbox()
+        default:
+            println("default (check ViewController tableView)")
         }
         tableView.deselectRowAtIndexPath(indexPath, animated:true)
     }
